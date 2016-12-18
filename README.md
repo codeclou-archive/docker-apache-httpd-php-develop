@@ -4,7 +4,7 @@ development image of Apache HTTPD and PHP
 
 ### Usage
 
-You can use any command provided by [node-deploy-essentials](https://github.com/codeclou/node-deploy-essentials) like this
+Start an Apache2 Webserver with PHP 7 on Port 8899 with files in current directory to be served.
 
 ```
 docker run -p 8899:80 -v $(pwd):/var/www/html codeclou/docker-apache-httpd-php-develop:latest
