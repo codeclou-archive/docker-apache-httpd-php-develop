@@ -14,6 +14,11 @@ RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && 
 RUN a2enmod rewrite
 
 #
+# SITES
+#
+COPY sites-enabled-default.conf /etc/apache2/sites-enabled/000-default.conf
+
+#
 # WORKDIR
 #
 WORKDIR /var/www/html
