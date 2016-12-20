@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && 
 #
 # MODS
 #
-
-# a2enmod ???
+RUN a2enmod rewrite
 
 #
 # WORKDIR
