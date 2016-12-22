@@ -32,4 +32,10 @@ env APACHE_RUN_USER www-data
 env APACHE_RUN_GROUP www-data
 env APACHE_LOG_DIR /var/log/apache2/
 
+#
+# APACHE ERROR LOG TO STDOUT
+#
+RUN ln -sf /dev/stderr /var/log/apache2/error.log
+
+
 CMD apache2 -DFOREGROUND
