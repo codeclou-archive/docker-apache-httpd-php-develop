@@ -37,5 +37,14 @@ env APACHE_LOG_DIR /var/log/apache2/
 #
 RUN ln -sf /dev/stderr /var/log/apache2/error.log
 
+#
+# PHP.INI
+#
+RUN sed -i -e 's/upload_max_filesize.*/upload_max_filesize = 32M/g' /etc/php/7.0/apache2/php.ini && \
+    sed -i -e 's/post_max_size.*/post_max_size = 32M/g' /etc/php/7.0/apache2/php.ini
 
+
+#
+# RUN
+#
 CMD apache2 -DFOREGROUND
