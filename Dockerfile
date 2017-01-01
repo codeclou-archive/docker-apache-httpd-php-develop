@@ -33,6 +33,8 @@ RUN ln -sf /dev/stderr /var/log/apache2/error.log && \
     adduser -D -G phpworker -u 10777 phpworker && \
     chown -R phpworker:phpworker /var/www/localhost/htdocs && \
     chown -R phpworker:phpworker /var/www/logs && \
+    touch /var/www/logs/error.log && chown -R phpworker:phpworker /var/www/logs/error.log && \
+    touch /var/www/logs/access.log && chown -R phpworker:phpworker /var/www/logs/access.log && \
     chown -R phpworker:phpworker /var/log/apache2 && \
     mkdir /run/apache2 && chown -R phpworker:phpworker /run/apache2 && \
     sed -i -e 's/upload_max_filesize.*/upload_max_filesize = 32M/g' /etc/php7/php.ini && \
