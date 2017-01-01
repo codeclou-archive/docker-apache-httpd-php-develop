@@ -15,6 +15,7 @@ RUN apk add --no-cache php7-mysqli && \
     apk add --no-cache php7-mcrypt && \
     apk add --no-cache php7-zip && \
     apk add --no-cache php7-dba && \
+    apk add --no-cache php7-session && \
     apk add --no-cache apache2 && \
     apk add --no-cache apache2-utils && \
     apk add --no-cache php7-apache2
