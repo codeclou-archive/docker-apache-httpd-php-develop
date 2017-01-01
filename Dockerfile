@@ -5,6 +5,7 @@ FROM alpine:3.5
 #
 RUN apk add --no-cache php7-mysqli && \
     apk add --no-cache php7-pdo_mysql && \
+    apk add --no-cache php7-ctype && \
     apk add --no-cache php7-json && \
     apk add --no-cache php7-gd && \
     apk add --no-cache php7-curl && \
