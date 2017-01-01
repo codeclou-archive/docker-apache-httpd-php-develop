@@ -40,7 +40,9 @@ RUN ln -sf /dev/stderr /var/log/apache2/error.log && \
     mkdir /run/apache2 && chown -R phpworker:phpworker /run/apache2 && \
     sed -i -e 's/upload_max_filesize.*/upload_max_filesize = 32M/g' /etc/php7/php.ini && \
     sed -i -e 's/post_max_size.*/post_max_size = 32M/g' /etc/php7/php.ini && \
-    sed -i -e 's/Listen 80/Listen 9999\nServerName localhost/g' /etc/apache2/httpd.conf
+    sed -i -e 's/Listen 80/Listen 9999\nServerName localhost/g' /etc/apache2/httpd.conf && \
+    sed -i -e 's/AllowOverride None/AllowOverride All/g' /etc/apache2/httpd.conf && \
+    sed -i -e 's/#LoadModule rewrite_module/LoadModule rewrite_module/g' /etc/apache2/httpd.conf
 
 #
 # RUN
