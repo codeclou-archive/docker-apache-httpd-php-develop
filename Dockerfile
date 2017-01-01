@@ -1,54 +1,47 @@
-FROM ubuntu:16.04
+FROM alpine:3.5
 
 #
-# PACKAGES
+# BASE PACKAGES
 #
-RUN apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/* && \
-    sudo apt-get update && \
-    sudo apt-get -y install apt-utils wget curl bzip2 build-essential zlib1g-dev git && \
-    sudo apt-get -y install apache2 php7.0 php7.0-xml php7.0-mysql php7.0-json php7.0-gd php7.0-curl php7.0-pgsql php7.0-recode php7.0-sqlite3 php7.0-bcmath php7.0-mbstring php7.0-mcrypt php7.0-zip php7.0-dba libapache2-mod-php7.0
-
-#
-# MODS
-#
-RUN a2enmod rewrite
-
-#
-# SITES
-#
-COPY sites-enabled-default.conf /etc/apache2/sites-enabled/000-default.conf
+RUN apk add --no-cache php7-mysqli && \
+    apk add --no-cache php7-pdo_mysql && \
+    apk add --no-cache php7-json && \
+    apk add --no-cache php7-gd && \
+    apk add --no-cache php7-curl && \
+    apk add --no-cache php7-pgsql && \
+    apk add --no-cache php7-sqlite3 && \
+    apk add --no-cache php7-bcmath && \
+    apk add --no-cache php7-mbstring && \
+    apk add --no-cache php7-mcrypt && \
+    apk add --no-cache php7-zip && \
+    apk add --no-cache php7-dba && \
+    apk add --no-cache apache2 && \
+    apk add --no-cache apache2-utils && \
+    apk add --no-cache php7-apache2
 
 #
 # WORKDIR
 #
-WORKDIR /var/www/html
-
-EXPOSE 80
-
-env APACHE_CONFDIR /etc/apache2
-env APACHE_LOCK_DIR /var/lock/apache2
-env APACHE_PID_FILE /var/run/apache2/apache2.pid
-env APACHE_RUN_USER www-data
-env APACHE_RUN_GROUP www-data
-env APACHE_LOG_DIR /var/log/apache2/
+WORKDIR /var/www/localhost/htdocs
+EXPOSE 9999
 
 #
-# APACHE ERROR LOG TO STDOUT
+# ERROR LOG, USER, PHP CONF, APACHE2 CONF
 #
-RUN ln -sf /dev/stderr /var/log/apache2/error.log
-
-#
-# PHP.INI
-#
-RUN sed -i -e 's/upload_max_filesize.*/upload_max_filesize = 32M/g' /etc/php/7.0/apache2/php.ini && \
-    sed -i -e 's/post_max_size.*/post_max_size = 32M/g' /etc/php/7.0/apache2/php.ini
-
-#
-# PERMISSIONS
-#
-RUN chown -R www-data:www-data /var/www/html
+RUN ln -sf /dev/stderr /var/log/apache2/error.log && \
+    addgroup -g 10777 phpworker && \
+    adduser -D -G phpworker -u 10777 phpworker && \
+    chown -R phpworker:phpworker /var/www/localhost/htdocs && \
+    chown -R phpworker:phpworker /var/www/logs && \
+    chown -R phpworker:phpworker /var/log/apache2 && \
+    mkdir /run/apache2 && chown -R phpworker:phpworker /run/apache2 && \
+    sed -i -e 's/upload_max_filesize.*/upload_max_filesize = 32M/g' /etc/php7/php.ini && \
+    sed -i -e 's/post_max_size.*/post_max_size = 32M/g' /etc/php7/php.ini && \
+    sed -i -e 's/Listen 80/Listen 9999\nServerName localhost/g' /etc/apache2/httpd.conf
 
 #
 # RUN
 #
-CMD apache2 -DFOREGROUND
+USER phpworker
+VOLUME ["/var/www/localhost/htdocs"]
+CMD ["httpd", "-DFOREGROUND"]
