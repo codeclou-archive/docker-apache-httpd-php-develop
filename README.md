@@ -1,5 +1,7 @@
 # docker-apache-httpd-php-develop
 
+[![](https://codeclou.github.io/doc/docker-image-size-14.svg)](https://hub.docker.com/r/codeclou/docker-apache-httpd-php-develop/tags/) [![](https://codeclou.github.io/doc/docker-from-alpine.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
+
 Docker image to run Apache HTTPD and PHP7 together for local development. Should not be used in production.
 
 ![](https://codeclou.github.io/doc/docker-warranty.svg?v5)
