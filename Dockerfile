@@ -28,7 +28,8 @@ RUN apk add --no-cache \
             php7-dom \
             apache2 \
             apache2-utils \
-            php7-apache2
+            php7-apache2 && \
+    apk -v cache clean
 
 #
 # ERROR LOG, USER, PHP CONF, APACHE2 CONF
