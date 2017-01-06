@@ -2,11 +2,20 @@
 
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-17.svg)](https://hub.docker.com/r/codeclou/docker-apache-httpd-php-develop/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-linux.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
-Docker image to run Apache HTTPD and PHP7 together for local development. Should not be used in production.
+Docker-Image to run Apache HTTPD and PHP7 together for local development. Should not be used in production.
 
-![](https://codeclou.github.io/doc/docker-warranty.svg?v5)
+-----
+&nbsp;
 
-----
+### Prerequisites
+
+ * Runs as non-root with fixed UID 10777 and GID 10777. See [howto prepare volume permissions](https://github.com/codeclou/doc/blob/master/docker/README.md).
+ * See [howto use SystemD for named Docker-Containers and system startup](https://github.com/codeclou/doc/blob/master/docker/README.md).
+
+
+-----
+&nbsp;
+
 
 ### Usage
 
@@ -40,7 +49,9 @@ docker run \
    * Inside PHP Code you can get it with `$env = getenv('ENVIRONMENT')`.
 
 -----
+&nbsp;
 
-### License
+### License, Liability & Support
 
-  * Dockerfile and Image is provided under [MIT License](https://github.com/codeclou/docker-apache-httpd-php-develop/blob/master/LICENSE.md)
+ * [![](https://codeclou.github.io/doc/docker-warranty-notice.svg?v1)](https://github.com/codeclou/docker-apache-httpd-php-develop/blob/master/LICENSE.md)
+ * Dockerfile and Image is provided under [MIT License](https://github.com/codeclou/docker-apache-httpd-php-develop/blob/master/LICENSE.md)
